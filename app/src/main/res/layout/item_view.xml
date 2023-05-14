@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="12dp">
+
+    <ImageView
+        android:id="@+id/flag_iv"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_imageview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/kz" />
+    <TextView
+        android:id="@+id/name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/capital_tv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flag_iv"
+        tools:text="Item Number 1"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/capital_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/flag_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/flag_iv"
+        tools:text="Item Number" />
+    <ImageView
+        android:id="@+id/drop_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_arrow_drop_down"
+        app:layout_constraintBottom_toBottomOf="@id/capital_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/name_tv" />
+
+    <LinearLayout
+        android:id="@+id/expandableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/capital_tv">
+
+        <TextView
+            android:id="@+id/population_tv"
+            android:paddingTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/flag_iv"
+            tools:text="population" />
+
+        <TextView
+            android:id="@+id/area_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/population_tv"
+            app:layout_constraintStart_toEndOf="@+id/flag_iv"
+            tools:text="area" />
+
+        <TextView
+            android:id="@+id/currencies_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@id/population_tv"
+            app:layout_constraintStart_toEndOf="@+id/flag_iv"
+            tools:text="currencies" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
