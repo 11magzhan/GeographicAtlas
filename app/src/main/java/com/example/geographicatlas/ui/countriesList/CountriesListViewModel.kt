@@ -1,4 +1,4 @@
-package com.example.geographicatlas
+package com.example.geographicatlas.ui.countriesList
 
 import androidx.lifecycle.ViewModel
 

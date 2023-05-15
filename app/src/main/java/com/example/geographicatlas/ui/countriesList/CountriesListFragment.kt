@@ -1,10 +1,13 @@
-package com.example.geographicatlas
+package com.example.geographicatlas.ui.countriesList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.geographicatlas.R
+import com.example.geographicatlas.RecyclerViewAdapter
+import com.example.geographicatlas.RetrofitClient
 import com.example.geographicatlas.databinding.FragmentCountriesListBinding
 import kotlinx.coroutines.launch
 
