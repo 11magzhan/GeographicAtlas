@@ -4,13 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.geographicatlas.databinding.ItemViewBinding
 
 class RecyclerViewAdapter(
-    private val itemList: List<CountryItem>,
 ) : RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     private var expandedItems: ArrayList<CountryItem> = arrayListOf()
+    private var itemList = listOf<CountryItem>()
+    fun setData(newList: List<CountryItem>) {
+        itemList = newList
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(
         private val binding: ItemViewBinding
@@ -18,11 +23,14 @@ class RecyclerViewAdapter(
 
         fun bind(item: CountryItem) {
             val isExpanded = expandedItems.contains(item)
-            binding.nameTv.text = item.name
-            binding.capitalTv.text = item.capital
-            binding.populationTv.text = item.population
+            //binding.nameTv.text = item.name
+            //binding.capitalTv.text = item.capital
+            binding.populationTv.text = item.population.toString()
             binding.areaTv.text = item.area.toString()
-            //binding.flagIv.setImageDrawable(R.drawable.kz)
+//            Glide.with(binding.root.context)
+//                .load(item.flag)
+//                .placeholder(R.drawable.kz) // set a placeholder image
+//                .into(binding.flagIv)
             binding.dropDown.setImageResource(
                 if (isExpanded) R.drawable.ic_arrow_drop_up
                 else R.drawable.ic_arrow_drop_down
