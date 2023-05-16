@@ -4,20 +4,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.geographicatlas.R
-import com.example.geographicatlas.data.CountryItem
 import com.example.geographicatlas.databinding.ItemHeaderBinding
 import com.example.geographicatlas.databinding.ItemViewBinding
+import com.example.geographicatlas.ui.countriesList.CountriesListFragmentDirections
+import com.example.geographicatlas.ui.model.CountryModel
 import com.example.geographicatlas.ui.model.Item
 
 class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
-
-    private var expandedItems: ArrayList<CountryItem> = arrayListOf()
-    private var itemList = listOf<Item>()
 
     override fun getItemViewType(position: Int): Int {
         val item = getItem(position)
@@ -69,9 +68,9 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
         private val binding: ItemViewBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: CountryItem) {
+        fun bind(item: CountryModel) {
             Log.d("adapter", "test1${binding.root}")
-            val isExpanded = expandedItems.contains(item)
+            //val isExpanded = expandedItems.contains(item)
             binding.nameTv.text = item.name.common
             binding.capitalTv.text = item?.capital?.get(0) ?: "no"
             binding.populationTv.text = "Population: ${item.population.toString()}"
@@ -83,18 +82,20 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
                 .load(item.flag.png)
                 .into(binding.flagIv)
             binding.dropDown.setImageResource(
-                if (isExpanded) R.drawable.ic_arrow_drop_up
+                if (item.isExpanded) R.drawable.ic_arrow_drop_up
                 else R.drawable.ic_arrow_drop_down
             )
-            binding.expandableLayout.isVisible = isExpanded
+            binding.expandableLayout.isVisible = item.isExpanded
 
             binding.dropDown.setOnClickListener {
-                if (expandedItems.contains(item)) {
-                    expandedItems.remove(item)
-                } else {
-                    expandedItems.add(item)
-                }
-//                notifyItemChanged(bindingAdapterPosition)
+
+                item.isExpanded = !item.isExpanded
+                notifyItemChanged(bindingAdapterPosition)
+            }
+            binding.learnMore.setOnClickListener {
+                val countryId = item.cca2 // The ID you want to pass to the countryDetailsFragment
+                val action = CountriesListFragmentDirections.openCountryDetails(countryId)
+                Navigation.findNavController(itemView).navigate(action)
             }
 
         }

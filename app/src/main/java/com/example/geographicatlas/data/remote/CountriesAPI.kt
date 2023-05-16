@@ -9,6 +9,7 @@ interface CountriesAPI {
     @GET("all")
     suspend fun getAllCountries(): List<CountryItem>
 
-    @GET("alpha/{code}")
-    suspend fun getCountry(@Path("name") code: String): CountryItem
+    @GET("alpha/{cca2}")
+    suspend fun getCountry(@Path("cca2") cca2: String): List<CountryItem>
+
 }

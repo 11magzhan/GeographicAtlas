@@ -19,14 +19,16 @@ data class CountryItem(
 //    val region: String,
     @SerializedName("continents")
     val continents: List<String>,
-    @SerializedName("cca2")
-    val cca2: String,
     @SerializedName("capitalInfo")
     val capitalInfo: CapitalInfo,
     @SerializedName("region")
     val region: String,
     @SerializedName("maps")
     val maps: Maps,
+    @SerializedName("subregion")
+    val subregion: String?,
+    @SerializedName("cca2")
+    val cca2: String,
 //    @SerializedName("timezones")
 //    val timezones: List<String>
 )

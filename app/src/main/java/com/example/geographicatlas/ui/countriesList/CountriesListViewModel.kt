@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.geographicatlas.data.CountryItem
 import com.example.geographicatlas.data.remote.RetrofitClient
+import com.example.geographicatlas.ui.model.CountryModel
 import com.example.geographicatlas.ui.model.Item
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +17,15 @@ class CountriesListViewModel: ViewModel()  {
     init {
         Log.d("TAG", "init called")
         getAllCountries()
+    }
+
+    fun onItemExpand(position: Int) {
+        val oldList =  remoteAllCountries.value ?: return
+        val oldItem = oldList[position] as? Item.Country ?: return
+        val newItem = oldItem.copy(country = oldItem.country.copy(isExpanded = !oldItem.country.isExpanded))
+        val newList = oldList.toMutableList()
+        newList[position] = newItem
+        remoteAllCountries.value = newList
     }
 
     fun getAllCountries() {
@@ -39,7 +48,7 @@ class CountriesListViewModel: ViewModel()  {
                 listOf(Item.Header(continent)) +
                         countryNetworkModels.map {
                             Item.Country(
-                                CountryItem(
+                                CountryModel(
                                     area = it.area,
                                     capital = it.capital,
                                     cca2 = it.cca2,

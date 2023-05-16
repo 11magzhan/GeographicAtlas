@@ -20,7 +20,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/detail_flag_iv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="180dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             tools:src="@drawable/kz" />

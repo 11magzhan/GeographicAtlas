@@ -30,7 +30,6 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = RecyclerViewAdapter()
-        binding.test.text = "test11"
         binding.recyclerView.adapter = adapter
 
 
