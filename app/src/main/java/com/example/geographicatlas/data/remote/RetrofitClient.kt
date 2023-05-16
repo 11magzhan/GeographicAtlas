@@ -1,6 +1,5 @@
-package com.example.geographicatlas
+package com.example.geographicatlas.data.remote
 
-import com.example.geographicatlas.api.CountriesAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
