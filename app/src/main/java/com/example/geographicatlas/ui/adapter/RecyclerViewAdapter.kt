@@ -28,13 +28,15 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             HEADER -> {
-                val binding = ItemHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                    HeaderViewHolder(binding)
+                val binding =
+                    ItemHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                HeaderViewHolder(binding)
             }
             COUNTRY -> {
-                val binding = ItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding =
+                    ItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 CountryViewHolder(binding)
             }
             else -> throw java.lang.IllegalArgumentException("Invalid type")
@@ -53,7 +55,6 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
                     holder.bind(it.country)
                 }
             }
-
             is HeaderViewHolder -> {
                 val headerWrapper = currentItem as? Item.Header
                 headerWrapper?.let {
@@ -61,7 +62,6 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
                 }
             }
         }
-
     }
 
     inner class CountryViewHolder(
@@ -69,16 +69,17 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CountryModel) {
-           // Log.d("adapter", "test1${binding.root}")
+            // Log.d("adapter", "test1${binding.root}")
             binding.nameTv.text = item.name.common
-            binding.capitalTv.text = item?.capital?.get(0) ?: "no"
+            binding.capitalTv.text = item.capital?.get(0) ?: "no"
             binding.populationTv.text = "Population: ${item.population.toString()}"
-            binding.areaTv.text = "Area: ${item.area.toString()}"
-            val currenciesText = item.currencies?.entries?.map { "${it.value.name} (${it.value.symbol}) (${it.key})" }
-                ?.joinToString("\n")
+            binding.areaTv.text = "Area: ${item.area.toString()} km²"
+            val currenciesText =
+                item.currencies?.entries?.map { "${it.value.name} (${it.value.symbol}) (${it.key})" }
+                    ?.joinToString("\n")
             binding.currenciesTv.text = "Currencies: $currenciesText"
             Glide.with(binding.root.context)
-                .load(item.flag.png)
+                .load(item.flags.png)
                 .into(binding.flagIv)
             binding.dropDown.setImageResource(
                 if (item.isExpanded) R.drawable.ic_arrow_drop_up
@@ -94,22 +95,26 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
             binding.learnMore.setOnClickListener {
                 val countryId = item.cca2
                 val countryName = item.name.common
-                val action = CountriesListFragmentDirections.openCountryDetails(countryId, countryName)
+                val action =
+                    CountriesListFragmentDirections.openCountryDetails(countryId, countryName)
                 Navigation.findNavController(itemView).navigate(action)
             }
-
         }
     }
-    class HeaderViewHolder(private val binding: ItemHeaderBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    class HeaderViewHolder(private val binding: ItemHeaderBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(header: String) {
-           binding.header.text = header
+            binding.header.text = header
         }
     }
+
     class Diff : DiffUtil.ItemCallback<Item>() {
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem == newItem
         }
+
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem == newItem
         }

@@ -1,5 +1,6 @@
 package com.example.geographicatlas.ui.countryDetail
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,9 +9,10 @@ import com.example.geographicatlas.data.remote.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CountryDetailsViewModel: ViewModel() {
+class CountryDetailsViewModel : ViewModel() {
 
-    val remoteCountry: MutableLiveData<List<CountryItem>> = MutableLiveData()
+    private val _remoteCountry: MutableLiveData<List<CountryItem>> = MutableLiveData()
+    val remoteCountry: LiveData<List<CountryItem>> get() = _remoteCountry
 
     fun onViewInit(countryCode: String) {
         getCountryDetails(countryCode)
@@ -18,7 +20,8 @@ class CountryDetailsViewModel: ViewModel() {
 
     private fun getCountryDetails(countryCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            remoteCountry.postValue(RetrofitClient.apiService.getCountry(countryCode))
+            val country = RetrofitClient.apiService.getCountry(countryCode)
+            _remoteCountry.postValue(country)
         }
     }
 }

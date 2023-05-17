@@ -33,10 +33,8 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
         adapter = RecyclerViewAdapter()
         binding.recyclerView.adapter = adapter
 
-
         viewModel.remoteAllCountries.observe(viewLifecycleOwner) {
-//            adapter.submitList(it)
-            when(it) {
+            when (it) {
                 is Resource.Loading -> {
                     binding.shimmerLayout.startShimmer()
                 }
@@ -57,16 +55,6 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
             visibility = View.GONE
         }
         binding.recyclerView.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.shimmerLayout.startShimmer()
-    }
-
-    override fun onPause() {
-        binding.shimmerLayout.stopShimmer()
-        super.onPause()
     }
 
     override fun onDestroyView() {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.geographicatlas.data.CountryItem
 import com.example.geographicatlas.databinding.FragmentCountryDetailsBinding
 
 class CountryDetailsFragment : Fragment() {
@@ -27,31 +28,40 @@ class CountryDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
+
+        setupActionBar()
         viewModel.onViewInit(args.countryId)
-        (requireActivity() as AppCompatActivity).supportActionBar?.title = args.countryName
-        viewModel.remoteCountry.observe(viewLifecycleOwner) {
-            binding.apply {val country = it[0]
-                Glide.with(binding.root.context)
-                    .load(country.flag.png)
-                    .into(binding.detailFlagIv)
-                capitalText.text = "Capital: \n${country.capital?.get(0) ?: "No capital"}"
-                coordinatesText.text = "Capital coordinates: \n${country.capitalInfo.latlng}"
-                populationText.text = "Population:\n${country.population.toString()}"
-                areaText.text = "Area: \n${country.area.toString()}"
-                val tengeText = country.currencies?.entries?.map { "${it.value.name} (${it.value.symbol}) (${it.key})" }
-                    ?.joinToString("\n")
-                currencyText.text = "Currency: \n${tengeText}"
-                regionText.text = "Region: \n${country.subregion}"
-                timezonesText.text = "Timezones: \n${country.timezones}"
+        viewModel.remoteCountry.observe(viewLifecycleOwner) { countryItems ->
+            countryItems.firstOrNull()?.let { country ->
+                populateCountryDetails(country)
             }
         }
-
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    private fun setupActionBar() {
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = args.countryName
+    }
+
+    private fun populateCountryDetails(country: CountryItem) {
+        binding.apply {
+            Glide.with(binding.root.context)
+                .load(country.flags.png)
+                .into(detailFlagIv)
+            capitalText.text = "Capital: \n${country.capital?.get(0) ?: "No capital"}"
+            coordinatesText.text = "Capital coordinates: \n${country.capitalInfo.latlng}"
+            populationText.text = "Population:\n${country.population.toString()}"
+            areaText.text = "Area: \n${country.area.toString()} km²"
+            val tengeText = country.currencies?.entries?.map { "${it.value.name} (${it.value.symbol}) (${it.key})" }
+                ?.joinToString("\n")
+             currencyText.text = "Currency: \n${tengeText}"
+            regionText.text = "Region: \n${country.subregion}"
+            timezonesText.text = "Timezones: \n${country.timezones}"
+        }
+    }
 }

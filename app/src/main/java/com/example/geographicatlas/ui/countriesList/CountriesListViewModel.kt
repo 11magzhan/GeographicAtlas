@@ -1,6 +1,7 @@
 package com.example.geographicatlas.ui.countriesList
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,29 +12,24 @@ import com.example.geographicatlas.utilities.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CountriesListViewModel: ViewModel()  {
+class CountriesListViewModel : ViewModel() {
 
-    val remoteAllCountries: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
+    private val _remoteAllCountries: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
+    val remoteAllCountries: LiveData<Resource<List<Item>>> get() = _remoteAllCountries
 
     init {
         Log.d("TAG", "init called")
         getAllCountries()
     }
 
-    fun getAllCountries() {
+    private fun getAllCountries() {
         viewModelScope.launch(Dispatchers.IO) {
-            remoteAllCountries.postValue(Resource.Loading())
-        Log.d("TAG", "getallcountries scope called")
-            // take all data for group
+            _remoteAllCountries.postValue(Resource.Loading())
             val countriesList = RetrofitClient.apiService.getAllCountries()
-            // map to list of Country class
             val continentGroups = countriesList
                 .flatMap { country -> country.continents.map { continent -> continent to country } }
                 .groupBy({ it.first }, { it.second })
                 .toSortedMap()
-
-            // group by continent
-//            val groupedCountries = countriesList.groupBy { it.continents }
 
             val rowItems = mutableListOf<Item>()
 
@@ -47,7 +43,7 @@ class CountriesListViewModel: ViewModel()  {
                                     cca2 = it.cca2,
                                     continents = it.continents,
                                     currencies = it.currencies,
-                                    flag = it.flag,
+                                    flags = it.flags,
                                     capitalInfo = it.capitalInfo,
                                     name = it.name,
                                     population = it.population,
@@ -57,9 +53,7 @@ class CountriesListViewModel: ViewModel()  {
                             )
                         }
             }.toCollection(rowItems)
-
-        Log.d("TAG", "getallcountries scope finishing")
-            remoteAllCountries.postValue(Resource.Success(rowItems))
+            _remoteAllCountries.postValue(Resource.Success(rowItems))
         }
     }
 }
