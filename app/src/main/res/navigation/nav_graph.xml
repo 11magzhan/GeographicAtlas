@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/countriesListFragment">
+    <fragment
+        android:id="@+id/countriesListFragment"
+        android:name="com.example.geographicatlas.presentation.countries_list.CountriesListFragment"
+        android:label="World countries"
+        tools:layout="@layout/fragment_countries_list" >
+        <action
+            android:id="@+id/openCountryDetails"
+            app:destination="@id/countryDetailsFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/countryDetailsFragment"
+        android:name="com.example.geographicatlas.presentation.country_detail.CountryDetailsFragment"
+        android:label="Kazakhstan"
+        tools:layout="@layout/fragment_country_details" >
+        <argument
+            android:name="countryId"
+            app:argType="string" />
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+    </fragment>
+</navigation>
