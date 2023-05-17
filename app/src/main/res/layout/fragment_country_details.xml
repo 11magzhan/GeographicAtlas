@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.countryDetail.CountryDetailsFragment"
-    android:padding="15dp">
+    android:padding="20dp">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/detail_card"
@@ -29,59 +29,74 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/detail_card"
         app:layout_constraintTop_toBottomOf="@+id/detail_card"
         >
         <TextView
-            android:id="@+id/capital"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Capital:"/>
-        <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/capitalText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Astana"/>
+            android:text="&#8226; Capital:"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="20sp"/>
+
         <TextView
-            android:id="@+id/population"
+            android:layout_marginVertical="5dp"
+            android:id="@+id/coordinatesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Population:"/>
+            android:text="&#8226; Capital Coordinates:"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="20sp"/>
+
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/populationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="120"/>
+            android:textColor="?attr/colorOnSecondary"
+            android:text="&#8226; Population:"
+            android:textSize="20sp"
+            />
+
         <TextView
-            android:id="@+id/area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Area:"/>
-        <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/areaText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="120000"/>
+            android:textColor="?attr/colorOnSecondary"
+            android:text="&#8226; Area:"
+            android:textSize="20sp"/>
+
         <TextView
-            android:id="@+id/currency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Currency:"/>
-        <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/currencyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tng"/>
+            android:textColor="?attr/colorOnSecondary"
+            android:text="&#8226; Currencies:"
+            android:textSize="20sp"/>
+
         <TextView
-            android:id="@+id/region"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Region:"/>
-        <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/regionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Asia"/>
+            android:textColor="?attr/colorOnSecondary"
+            android:text="&#8226; Region:"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:layout_marginVertical="5dp"
+            android:id="@+id/timezonesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSecondary"
+            android:text="&#8226; Timezones:"
+            android:textSize="20sp"
+            />
 
     </LinearLayout>
 

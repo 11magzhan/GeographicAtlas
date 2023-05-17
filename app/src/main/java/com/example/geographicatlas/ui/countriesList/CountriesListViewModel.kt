@@ -7,29 +7,22 @@ import androidx.lifecycle.viewModelScope
 import com.example.geographicatlas.data.remote.RetrofitClient
 import com.example.geographicatlas.ui.model.CountryModel
 import com.example.geographicatlas.ui.model.Item
+import com.example.geographicatlas.utilities.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CountriesListViewModel: ViewModel()  {
 
-    val remoteAllCountries: MutableLiveData<List<Item>> = MutableLiveData()
+    val remoteAllCountries: MutableLiveData<Resource<List<Item>>> = MutableLiveData()
 
     init {
         Log.d("TAG", "init called")
         getAllCountries()
     }
 
-    fun onItemExpand(position: Int) {
-        val oldList =  remoteAllCountries.value ?: return
-        val oldItem = oldList[position] as? Item.Country ?: return
-        val newItem = oldItem.copy(country = oldItem.country.copy(isExpanded = !oldItem.country.isExpanded))
-        val newList = oldList.toMutableList()
-        newList[position] = newItem
-        remoteAllCountries.value = newList
-    }
-
     fun getAllCountries() {
         viewModelScope.launch(Dispatchers.IO) {
+            remoteAllCountries.postValue(Resource.Loading())
         Log.d("TAG", "getallcountries scope called")
             // take all data for group
             val countriesList = RetrofitClient.apiService.getAllCountries()
@@ -66,7 +59,7 @@ class CountriesListViewModel: ViewModel()  {
             }.toCollection(rowItems)
 
         Log.d("TAG", "getallcountries scope finishing")
-            remoteAllCountries.postValue(rowItems)
+            remoteAllCountries.postValue(Resource.Success(rowItems))
         }
     }
 }

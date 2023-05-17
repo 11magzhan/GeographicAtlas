@@ -15,8 +15,6 @@ data class CountryItem(
     val area: Double,
     @SerializedName("currencies")
     val currencies: HashMap<String, Currency>?,
-//    @SerializedName("subregion")
-//    val region: String,
     @SerializedName("continents")
     val continents: List<String>,
     @SerializedName("capitalInfo")
@@ -29,8 +27,8 @@ data class CountryItem(
     val subregion: String?,
     @SerializedName("cca2")
     val cca2: String,
-//    @SerializedName("timezones")
-//    val timezones: List<String>
+    @SerializedName("timezones")
+    val timezones: List<String>
 )
 
 data class Currency(
@@ -51,13 +49,11 @@ data class Flag(
     val png: String,
 )
 data class CapitalInfo(
-
     @SerializedName("latlng")
     val latlng: List<Double>
 )
 
 data class Maps(
-
     @SerializedName("google-maps")
     val googleMaps: String,
     @SerializedName("openstreetmap")

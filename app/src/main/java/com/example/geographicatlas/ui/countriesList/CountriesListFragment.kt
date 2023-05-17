@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.example.geographicatlas.R
 import com.example.geographicatlas.databinding.FragmentCountriesListBinding
 import com.example.geographicatlas.ui.adapter.RecyclerViewAdapter
+import com.example.geographicatlas.utilities.Resource
 
 class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
 
@@ -34,14 +35,42 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
 
 
         viewModel.remoteAllCountries.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+//            adapter.submitList(it)
+            when(it) {
+                is Resource.Loading -> {
+                    binding.shimmerLayout.startShimmer()
+                }
+                is Resource.Success -> {
+                    it.data.let {
+                        showRecyclerView()
+                        adapter.submitList(it)
+                    }
+                }
+                else -> {}
+            }
         }
+    }
 
-//        lifecycleScope.launch {
-//            val countries = RetrofitClient.apiService.getAllCountries()
-//            adapter.setData(countries)
-//        }
+    private fun showRecyclerView() {
+        binding.shimmerLayout.apply {
+            stopShimmer()
+            visibility = View.GONE
+        }
+        binding.recyclerView.visibility = View.VISIBLE
+    }
 
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerLayout.startShimmer()
+    }
 
+    override fun onPause() {
+        binding.shimmerLayout.stopShimmer()
+        super.onPause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

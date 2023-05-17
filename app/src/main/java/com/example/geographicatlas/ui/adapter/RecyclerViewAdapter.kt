@@ -69,15 +69,14 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: CountryModel) {
-            Log.d("adapter", "test1${binding.root}")
-            //val isExpanded = expandedItems.contains(item)
+           // Log.d("adapter", "test1${binding.root}")
             binding.nameTv.text = item.name.common
             binding.capitalTv.text = item?.capital?.get(0) ?: "no"
             binding.populationTv.text = "Population: ${item.population.toString()}"
             binding.areaTv.text = "Area: ${item.area.toString()}"
             val currenciesText = item.currencies?.entries?.map { "${it.value.name} (${it.value.symbol}) (${it.key})" }
                 ?.joinToString("\n")
-            binding.currenciesTv.text = currenciesText
+            binding.currenciesTv.text = "Currencies: $currenciesText"
             Glide.with(binding.root.context)
                 .load(item.flag.png)
                 .into(binding.flagIv)
@@ -87,14 +86,15 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
             )
             binding.expandableLayout.isVisible = item.isExpanded
 
-            binding.dropDown.setOnClickListener {
+            binding.itemCard.setOnClickListener {
 
                 item.isExpanded = !item.isExpanded
                 notifyItemChanged(bindingAdapterPosition)
             }
             binding.learnMore.setOnClickListener {
-                val countryId = item.cca2 // The ID you want to pass to the countryDetailsFragment
-                val action = CountriesListFragmentDirections.openCountryDetails(countryId)
+                val countryId = item.cca2
+                val countryName = item.name.common
+                val action = CountriesListFragmentDirections.openCountryDetails(countryId, countryName)
                 Navigation.findNavController(itemView).navigate(action)
             }
 
@@ -110,7 +110,6 @@ class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem == newItem
         }
-
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem == newItem
         }
