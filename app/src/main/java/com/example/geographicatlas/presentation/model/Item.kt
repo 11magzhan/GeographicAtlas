@@ -1,4 +1,4 @@
-package com.example.geographicatlas.ui.model
+package com.example.geographicatlas.presentation.model
 
 sealed class Item {
     data class Country(val country: CountryModel) : Item()

@@ -1,5 +1,7 @@
 package com.example.geographicatlas.data
 
+import com.example.geographicatlas.data.remote.model.*
+
 data class CountryItem(
     val name: Name,
     val capital: List<String>?,
@@ -16,23 +18,9 @@ data class CountryItem(
     val timezones: List<String>
 )
 
-data class Currency(
-    val name: String,
-    val symbol: String
-)
 
-data class Name(
-    val common: String,
-    val official: String
-)
-data class Flag(
-    val png: String,
-)
-data class CapitalInfo(
-    val latlng: List<Double>
-)
 
-data class Maps(
-    val googleMaps: String,
-    val openStreetMaps: String
-)
+
+
+
+

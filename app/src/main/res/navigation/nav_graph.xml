@@ -6,8 +6,8 @@
     app:startDestination="@id/countriesListFragment">
     <fragment
         android:id="@+id/countriesListFragment"
-        android:name="com.example.geographicatlas.ui.countriesList.CountriesListFragment"
-        android:label="World counries"
+        android:name="com.example.geographicatlas.presentation.countries_list.CountriesListFragment"
+        android:label="World countries"
         tools:layout="@layout/fragment_countries_list" >
         <action
             android:id="@+id/openCountryDetails"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/countryDetailsFragment"
-        android:name="com.example.geographicatlas.ui.countryDetail.CountryDetailsFragment"
+        android:name="com.example.geographicatlas.presentation.country_detail.CountryDetailsFragment"
         android:label="Kazakhstan"
         tools:layout="@layout/fragment_country_details" >
         <argument

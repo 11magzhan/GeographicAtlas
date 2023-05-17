@@ -1,6 +1,6 @@
-package com.example.geographicatlas.ui.model
+package com.example.geographicatlas.presentation.model
 
-import com.example.geographicatlas.data.*
+import com.example.geographicatlas.data.remote.model.*
 
 data class CountryModel(
     val area: Double,

@@ -1,4 +1,4 @@
-package com.example.geographicatlas.ui.countryDetail
+package com.example.geographicatlas.presentation.country_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

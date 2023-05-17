@@ -4,7 +4,7 @@ import com.example.geographicatlas.data.CountryItem
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface CountriesAPI {
+interface CountryApi {
 
     @GET("all")
     suspend fun getAllCountries(): List<CountryItem>

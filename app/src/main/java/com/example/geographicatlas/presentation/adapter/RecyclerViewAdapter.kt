@@ -1,4 +1,4 @@
-package com.example.geographicatlas.ui.adapter
+package com.example.geographicatlas.presentation.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,9 +12,9 @@ import com.bumptech.glide.Glide
 import com.example.geographicatlas.R
 import com.example.geographicatlas.databinding.ItemHeaderBinding
 import com.example.geographicatlas.databinding.ItemViewBinding
-import com.example.geographicatlas.ui.countriesList.CountriesListFragmentDirections
-import com.example.geographicatlas.ui.model.CountryModel
-import com.example.geographicatlas.ui.model.Item
+import com.example.geographicatlas.presentation.countries_list.CountriesListFragmentDirections
+import com.example.geographicatlas.presentation.model.CountryModel
+import com.example.geographicatlas.presentation.model.Item
 
 class RecyclerViewAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(Diff()) {
 

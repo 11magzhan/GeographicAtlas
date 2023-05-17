@@ -1,4 +1,4 @@
-package com.example.geographicatlas.ui.countryDetail
+package com.example.geographicatlas.presentation.country_detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

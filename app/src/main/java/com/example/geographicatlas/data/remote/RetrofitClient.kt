@@ -11,7 +11,7 @@ object RetrofitClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-    val apiService: CountriesAPI by lazy {
-        retrofit.create(CountriesAPI::class.java)
+    val apiService: CountryApi by lazy {
+        retrofit.create(CountryApi::class.java)
     }
 }

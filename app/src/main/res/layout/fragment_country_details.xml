@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.countryDetail.CountryDetailsFragment"
+    tools:context=".presentation.country_detail.CountryDetailsFragment"
     android:padding="20dp">
 
     <com.google.android.material.card.MaterialCardView

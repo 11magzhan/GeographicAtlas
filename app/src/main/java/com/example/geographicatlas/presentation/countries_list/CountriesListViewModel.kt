@@ -1,4 +1,4 @@
-package com.example.geographicatlas.ui.countriesList
+package com.example.geographicatlas.presentation.countries_list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.geographicatlas.data.remote.RetrofitClient
-import com.example.geographicatlas.ui.model.CountryModel
-import com.example.geographicatlas.ui.model.Item
+import com.example.geographicatlas.presentation.model.CountryModel
+import com.example.geographicatlas.presentation.model.Item
 import com.example.geographicatlas.utilities.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

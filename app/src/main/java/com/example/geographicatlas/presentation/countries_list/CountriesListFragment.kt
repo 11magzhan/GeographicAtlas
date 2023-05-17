@@ -1,6 +1,7 @@
-package com.example.geographicatlas.ui.countriesList
+package com.example.geographicatlas.presentation.countries_list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.geographicatlas.R
 import com.example.geographicatlas.databinding.FragmentCountriesListBinding
-import com.example.geographicatlas.ui.adapter.RecyclerViewAdapter
+import com.example.geographicatlas.presentation.adapter.RecyclerViewAdapter
 import com.example.geographicatlas.utilities.Resource
 
 class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
@@ -44,7 +45,9 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
                         adapter.submitList(it)
                     }
                 }
-                else -> {}
+                else -> {
+                    Log.d("State", "Error state")
+                }
             }
         }
     }
@@ -55,10 +58,5 @@ class CountriesListFragment : Fragment(R.layout.fragment_countries_list) {
             visibility = View.GONE
         }
         binding.recyclerView.visibility = View.VISIBLE
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
